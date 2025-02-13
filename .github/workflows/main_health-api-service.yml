@@ -45,17 +45,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/n3ssquick/health-api-service:latest
-
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C4836F1F9B2A458592B72CDCF007112C }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_336198971E114DDB99BA5E7589402052 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D092E2E5D66E43D1926BEE00832D5099 }}
-
-      - name: "Deploy to Azure Web App"
-        uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
-        with:
-          app-name: "health-api-service"
-          images: ghcr.io/n3ssquick/health-api-service:latest
