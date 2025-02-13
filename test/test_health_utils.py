@@ -8,9 +8,9 @@ logger = LoggerFactory.getLogger('Test Health Utils', "INFO")
 
 
 def test_health_functions():
-  assert calculate_bmi(175, 70) == 22.86, "Test case failed!"
-  assert calculate_bmr(175, 70, 25, 'male') == 1724.05, "Test case failed!"
-  assert calculate_bmr(175, 70, 25, 'female') == 1528.78, "Test case failed!"
+  assert calculate_bmi(175, 70) == 22.86
+  assert calculate_bmr(175, 70, 25, 'male') == 1724.05
+  assert calculate_bmr(175, 70, 25, 'female') == 1528.78
   logger.info("Health functions test passed")
 
 
