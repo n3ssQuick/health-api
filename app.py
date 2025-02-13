@@ -12,7 +12,7 @@ app = FastAPI()
 @app.post('/bmi',
           status_code=200,
           tags=["BMI"],
-          summary="Calculate Body Mass Index",
+          summary="Calculate Body Mass Index test",
           description="Calculate Body Mass Index (BMI) using height (cm) and weight (kg).",
           responses={
               200: {
