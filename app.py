@@ -1,12 +1,22 @@
 from utils.loggerFactory import LoggerFactory
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from utils.health_utils import calculate_bmi, calculate_bmr
 from utils.payload import BMIRequest, BMRRequest
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 # Configure logging
 logger = LoggerFactory.getLogger('Health API', "INFO")
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+  return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.post('/bmi',
