@@ -12,7 +12,7 @@ app = FastAPI()
 @app.post('/bmi',
           status_code=200,
           tags=["BMI"],
-          summary="Calculate Body Mass Index SUPERMEGA TEST DE A LA MORT QUI TUE",
+          summary="Calculate Body Mass Index",
           description="Calculate Body Mass Index (BMI) using height (cm) and weight (kg).",
           responses={
               200: {
