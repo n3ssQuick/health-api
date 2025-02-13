@@ -43,7 +43,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/health-api-service:latest
+          tags: ghcr.io/health-api-service:latest
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -57,4 +57,4 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: "health-api-service"
-          images: ghcr.io/${{ github.repository_owner }}/health-api-service:latest
+          images: ghcr.io/health-api-service:latest
