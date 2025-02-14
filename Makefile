@@ -1,4 +1,4 @@
-.PHONY: all init run test build clean
+.PHONY: init run test build clean
 
 local: init test run
 docker: build deploy

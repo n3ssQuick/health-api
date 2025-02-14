@@ -20,6 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set lowercase repository owner
+        id: lowercase
+        run: echo "lower_owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
@@ -44,4 +48,11 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/n3ssquick/health-api-service:latest
+          tags: ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F10A0D10B3D4435BB73B4C2916F9E6A }}
+          images: "ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest"
