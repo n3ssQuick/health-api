@@ -57,6 +57,13 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F10A0D10B3D4435BB73B4C2916F9E6A }}
           images: "ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest"
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C4836F1F9B2A458592B72CDCF007112C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_336198971E114DDB99BA5E7589402052 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D092E2E5D6E43D1926BEE00832D5099 }}
+
       - name: Restart Azure Web App
         run: |
           az webapp restart --name ${{ secrets.AZURE_WEBAPP_NAME }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
