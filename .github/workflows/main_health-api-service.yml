@@ -58,11 +58,7 @@ jobs:
           images: "ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest"
 
       - name: Restart Azure Web App
-        id: reset
-        uses: aliencube/publish-profile-actions@v1
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F10A0D10B3D4435BB73B4C2916F9E6A }}
-        with:
-          resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
-          appName: ${{ secrets.AZURE_WEBAPP_NAME }}
-          reset: true
+        run: |
+          curl -X POST "https://${{ secrets.AZURE_WEBAPP_NAME }}.scm.azurewebsites.net/api/app/restart" \
+          -u ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F10A0D10B3D4435BB73B4C2916F9E6A }} \
+          -H "Content-Length: 0"
