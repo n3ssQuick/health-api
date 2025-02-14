@@ -72,17 +72,21 @@ The deployment process is managed via **GitHub Actions** and **Azure Web Apps**:
 Once you run the CI/CD pipeline, the step **Build and push Docker image** will add it to the registry and Azure will be able to pull it. 
 
 ```yaml
-- name: Log in to GitHub Container Registry
+- name: Login to GitHub Container Registry
   uses: docker/login-action@v2
   with:
     registry: ghcr.io
-    username: ${{ github.actor }}
+    username: ${{ github.repository_owner }}
     password: ${{ secrets.GITHUB_TOKEN }}
 
 - name: Build and push Docker image
-  run: |
-    docker build -t ghcr.io/<your-username>/<your-image-name>:latest .
-    docker push ghcr.io/<your-username>/<your-image-name>:latest
+  uses: docker/build-push-action@v3
+  with:
+    context: .
+    file: ./Dockerfile
+    push: true
+    tags: ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest
+
 ```
 
 2. **GitHub Secrets Configuration** (needed for authentication):
