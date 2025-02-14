@@ -1,7 +1,7 @@
 .PHONY: init run test build clean
 
 local: init test run
-docker: build deploy
+docker: test build deploy
 
 init:
 	pip install -r requirements.txt
