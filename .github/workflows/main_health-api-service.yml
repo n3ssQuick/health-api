@@ -56,3 +56,7 @@ jobs:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F10A0D10B3D4435BB73B4C2916F9E6A }}
           images: "ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest"
+
+      - name: Restart Azure Web App
+        run: |
+          az webapp restart --name ${{ secrets.AZURE_WEBAPP_NAME }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
