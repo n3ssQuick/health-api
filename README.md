@@ -86,7 +86,6 @@ Once you run the CI/CD pipeline, the step **Build and push Docker image** will a
     file: ./Dockerfile
     push: true
     tags: ghcr.io/${{ env.lower_owner }}/${{ secrets.AZURE_WEBAPP_NAME }}:latest
-
 ```
 
 2. **GitHub Secrets Configuration** (needed for authentication):
