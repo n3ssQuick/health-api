@@ -70,7 +70,6 @@ async def index(request: Request):
 async def bmi(payload: BMIRequest):
   logger.info("Received BMI request with payload: %s", payload)
   try:
-    print("cc")
     bmi_value = calculate_bmi(payload.height, payload.weight)
   except ZeroDivisionError:
     logger.error("Height cannot be zero")
